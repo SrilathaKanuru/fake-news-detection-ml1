@@ -1,5 +1,5 @@
 import pandas as pd
-
+import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 
@@ -112,6 +112,11 @@ for name, model in models.items():
     predictions = model.predict(X_test)
 
     accuracy = accuracy_score(y_test, predictions)
+    
+    # save best model
+if name == "Logistic Regression":
+    joblib.dump(model, "fake_news_model.pkl")
+    joblib.dump(vectorizer, "vectorizer.pkl")
 
     print(f"{name}: {accuracy:.2f}")
 
